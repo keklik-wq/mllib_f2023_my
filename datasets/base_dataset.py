@@ -38,7 +38,7 @@ class BaseDataset(ABC):
         self.target_train = targets[:len_of_train]
 
         self.inputs_test = inputs[len_of_train:len_of_train + len_of_valid]
-        self.target_test = inputs[len_of_train:len_of_train + len_of_valid]
+        self.target_test = targets[len_of_train:len_of_train + len_of_valid]
 
         self.inputs_valid = inputs[len_of_train + len_of_valid:]
-        self.target_valid = inputs[len_of_train + len_of_valid:]
+        self.target_valid = targets[len_of_train + len_of_valid:]
