@@ -8,7 +8,7 @@ from utils.enums import SetType
 class LinRegDataset(BaseDataset):
 
     def __init__(self, cfg: EasyDict):
-        super(LinRegDataset, self).__init__(cfg.train_set_percent, cfg.valid_set_percent)
+        super(LinRegDataset, self).__init__(cfg.train_set_percent, cfg.valid_set_percent, cfg.is_shuffled)
 
         advertising_dataframe = read_dataframe_file(cfg.dataframe_path)
 

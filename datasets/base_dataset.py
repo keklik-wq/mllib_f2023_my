@@ -29,7 +29,7 @@ class BaseDataset(ABC):
         if self.is_shuffled:
             indexes = np.random.permutation(number_of_rows)
         else:
-            indexes = np.range(1,number_of_rows)
+            indexes = np.arange(1, number_of_rows)
 
         inputs = self.inputs[indexes]
         targets = self.targets[indexes]
