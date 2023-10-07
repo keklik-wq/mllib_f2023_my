@@ -21,6 +21,7 @@ class BaseDataset(ABC):
         # inputs variables
         pass
 
+
     def _divide_into_sets(self):
         number_of_rows = len(self.inputs)
         len_of_train = int(number_of_rows * self.train_set_percent)
