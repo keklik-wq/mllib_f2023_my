@@ -10,7 +10,10 @@ cfg.dataframe_path = 'linear_regression_dataset.csv'
 # cfg.base_functions contains callable functions to transform input features.
 # E.g., for polynomial regression: [lambda x: x, lambda x: x**2]
 # TODO You should populate this list with suitable functions based on the requirements.
-cfg.base_functions = [lambda x, i=i: x ** i for i in range(1, 3+1)]
+
+cfg.number_of_polynoms = 3
+
+cfg.base_functions = [lambda x, i=i: x ** i for i in range(1, cfg.number_of_polynoms+1)]
 
 
 cfg.train_set_percent = 0.8

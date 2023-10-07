@@ -19,31 +19,22 @@ data = ds.LinRegDataset(cf.cfg)
 
 cf.cfg.train_type = TrainType.gradient_descent
 
-model_1 = lr_model.LinearRegression(cf.cfg.base_functions, 0.01)
-model_1.train(data.inputs_train, data.target_train)
-prediction = model_1.__call__(data.inputs_valid)
+
+def train_model(number_of_polynom):
+    base_functions = [lambda x, i=i: x ** i for i in range(1, number_of_polynom + 1)]
+    model_1 = lr_model.LinearRegression(base_functions, 0.01)
+    model_1.train(data.inputs_train, data.target_train)
+    prediction = model_1.__call__(data.inputs_valid)
+    print(metric.mse(prediction, data.target_valid))
+    return prediction
+
+predictions = []
+predictions.append(train_model(number_of_polynom=1))
+predictions.append(train_model(number_of_polynom=3))
+predictions.append(train_model(number_of_polynom=100))
+
+
 
 graph = vis.Visualisation()
-graph.compare_model_predictions(data.inputs_valid, prediction, data.target_valid, "valid")
+graph.compare_model_predictions(data.inputs_valid, predictions, data.target_valid, "valid")
 
-"""
-cf.cfg.train_type = TrainType.gradient_descent
-cf.cfg.degree = 8
-model_2 = lr_model.LinearRegression(cf.cfg.base_functions, 0.01)
-
-cf.cfg.train_type = TrainType.gradient_descent
-cf.cfg.degree = 100
-model_3 = lr_model.LinearRegression(cf.cfg.base_functions, 0.01)
-
-cf.cfg.train_type = TrainType.normal_equation
-cf.cfg.degree = 1
-model_4 = lr_model.LinearRegression(cf.cfg.base_functions, 0.01)
-
-cf.cfg.train_type = TrainType.normal_equation
-cf.cfg.degree = 8
-model_5 = lr_model.LinearRegression(cf.cfg.base_functions, 0.01)
-
-cf.cfg.train_type = TrainType.normal_equation
-cf.cfg.degree = 100
-model_6 = lr_model.LinearRegression(cf.cfg.base_functions, 0.01)
-"""

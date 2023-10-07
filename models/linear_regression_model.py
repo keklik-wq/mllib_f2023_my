@@ -17,6 +17,7 @@ class LinearRegression():
                  reg_coefficient: float = 0.0,
                  experiment_name: str = "experiment_1"):
         self.weights = np.random.randn(len(base_functions) + 1)
+        print(f"WEIGHTS {len(base_functions) + 1}")
         self.base_functions = base_functions
         self.learning_rate = learning_rate
         self.reg_coefficient = reg_coefficient
@@ -51,7 +52,6 @@ class LinearRegression():
 
         plan_matrix_with_ones = np.insert(plan_matrix, 0, 1, axis=1)
 
-        print(plan_matrix_with_ones)
         return plan_matrix_with_ones
 
     def calculate_model_prediction(self, plan_matrix: np.ndarray) -> np.ndarray:
