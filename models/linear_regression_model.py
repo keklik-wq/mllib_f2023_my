@@ -22,6 +22,7 @@ class LinearRegression():
         self.learning_rate = learning_rate
         self.reg_coefficient = reg_coefficient
         # self.neptune_logger = Logger(cfg.env_path, cfg.project_name, experiment_name)
+        
 
     # Methods related to the Normal Equation
 
@@ -38,7 +39,9 @@ class LinearRegression():
         s_pseudo = np.where(s > max_value, 1 / s, 0)
         s_pseudo = np.transpose(s_pseudo)
 
-        pseudo_inverse = np.matmul(v * s_pseudo, np.transpose(u))
+        d = len(s)
+        s_pseudo_l2 = s_pseudo + (self.reg_coefficient * np.eye(d))
+        pseudo_inverse = np.matmul(v * s_pseudo_l2, np.transpose(u))
         return pseudo_inverse
 
     def _calculate_weights(self, pseudoinverse_plan_matrix: np.ndarray, targets: np.ndarray) -> None:
@@ -50,7 +53,7 @@ class LinearRegression():
         plan_matrix = np.array(
             [np.vectorize(self.base_functions[i])(inputs) for i in range(np.size(self.base_functions))]).transpose()
 
-        plan_matrix_with_ones = np.insert(plan_matrix, 0, 1, axis=1)
+        plan_matrix_with_ones = np.insert(plan_matrix, 0, 1, axis=1)  # TODO it is bad, need to change
 
         return plan_matrix_with_ones
 
@@ -70,14 +73,14 @@ class LinearRegression():
 
         error = predictions - targets
 
-        gradient = (2 / N) * np.dot(np.transpose(plan_matrix), error)
+        gradient = (2 / N) * np.dot(np.transpose(plan_matrix), error) - self.reg_coefficient * self.weights
 
         return gradient
 
     def calculate_cost_function(self, plan_matrix, targets):
         predictions = np.dot(plan_matrix, self.weights)
 
-        squared_error = mse(predictions, targets)
+        squared_error = mse(predictions, targets) + self.reg_coefficient*self.weights.T*self.weights
 
         return squared_error
 
