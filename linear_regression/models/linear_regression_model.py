@@ -5,6 +5,7 @@ from configs.linear_regression_cfg import cfg
 from utils.enums import TrainType
 from logs.Logger import Logger
 import cloudpickle
+import logging
 
 from utils.metrics import mse
 
@@ -17,7 +18,6 @@ class LinearRegression():
                  reg_coefficient: float = 0.0,
                  experiment_name: str = "experiment_1"):
         self.weights = np.random.randn(len(base_functions) + 1)
-        print(f"WEIGHTS {len(base_functions) + 1}")
         self.base_functions = base_functions
         self.learning_rate = learning_rate
         self.reg_coefficient = reg_coefficient
@@ -112,7 +112,8 @@ class LinearRegression():
                 # update weights w_{k+1} = w_k - γ * ∇_w E(w_k)
 
                 if current_epoch % 10 == 0:
-                    print(self.calculate_cost_function(plan_matrix, targets))
+                    pass
+                    #logging.info(self.calculate_cost_function(plan_matrix, targets))
 
     def __call__(self, inputs: np.ndarray) -> np.ndarray:
         """return prediction of the model"""
