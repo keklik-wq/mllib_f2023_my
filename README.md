@@ -1,4 +1,4 @@
-![img_1.png](images/img_1.png)
+![img_1.png](linear_regression/images/img_1.png)
 
 Валидация
-![img.png](images/img.png)
+![img.png](linear_regression/images/img.png)

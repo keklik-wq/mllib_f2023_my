@@ -1,8 +1,8 @@
 import numpy as np
-from utils.common_functions import read_dataframe_file
+from linear_regression.utils.common_functions import read_dataframe_file
 from easydict import EasyDict
-from datasets.base_dataset import BaseDataset
-from utils.enums import SetType
+from linear_regression.datasets.base_dataset import BaseDataset
+from linear_regression.utils.enums import SetType
 
 
 class LinRegDataset(BaseDataset):
@@ -42,7 +42,7 @@ class LinRegDataset(BaseDataset):
 
 
 if __name__ == '__main__':
-    from configs.linear_regression_cfg import cfg
+    from linear_regression.configs.linear_regression_cfg import cfg
 
     lin_reg_dataset1 = LinRegDataset(cfg, inputs_cols=['x_0', 'x_1', 'x_2'], target_cols=['y_0'])
     lin_reg_dataset = LinRegDataset(cfg)

@@ -1,13 +1,11 @@
 import sys
 
 import numpy as np
-from configs.linear_regression_cfg import cfg
-from utils.enums import TrainType
-from logs.Logger import Logger
+from linear_regression.configs.linear_regression_cfg import cfg
+from linear_regression.utils.enums import TrainType
 import cloudpickle
-import logging
 
-from utils.metrics import mse
+from linear_regression.utils.metrics import mse
 
 
 class LinearRegression():

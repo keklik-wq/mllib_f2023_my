@@ -2,8 +2,9 @@ import numpy as np
 from easydict import EasyDict
 from sklearn.datasets import load_digits
 
-from datasets.base_dataset_classes import BaseClassificationDataset
-from utils.enums import DataProcessTypes, SetType
+from logistic_regression.utils.enums import DataProcessTypes, SetType
+
+from logistic_regression.datasets.base_dataset_classes import BaseClassificationDataset
 
 
 class Digits(BaseClassificationDataset):
@@ -24,7 +25,7 @@ class Digits(BaseClassificationDataset):
 
         # preprocessing
         self.get_data_stats()
-        getattr(self,cfg.data_preprocess_type.name)()
+        #getattr(self,cfg.data_preprocess_type.name)()
 
     @property
     def inputs(self):

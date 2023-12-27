@@ -3,18 +3,18 @@ from dotenv import load_dotenv
 import os
 from typing import Union, List
 
-class Logger():
+
+class Logger:
     def __init__(self, env_path, project, experiment_name=None):
 
         load_dotenv(env_path)
         self.run = neptune.init_run(
             project=project,
-            api_token=os.environ['NEPTUNE_APIKEY'],
+            api_token=os.getenv('NEPTUNE_APIKEY'),
             name=experiment_name
         )
 
     def log_hyperparameters(self, params: dict):
-        # сохранение гиперпараметов модели
         for param, value in params.items():
             self.run[f'hyperparameters/{param}'] = value
 
@@ -24,8 +24,3 @@ class Logger():
                 self.run[f"{type_set}/{p_n}"].append(p_v)
         else:
             self.run[f"{type_set}/{metric_name}"].append(metric_value)
-
-
-
-
-

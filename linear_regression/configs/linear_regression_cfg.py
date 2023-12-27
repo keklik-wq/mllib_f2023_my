@@ -1,5 +1,5 @@
 from easydict import EasyDict
-from utils.enums import TrainType
+from linear_regression.utils.enums import TrainType
 
 cfg = EasyDict()
 
